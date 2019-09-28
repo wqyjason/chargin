@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, send_from_directory
 from forms import SearchForm
 from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
@@ -6,7 +6,7 @@ import csv
 from collections import defaultdict
 import math
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 GoogleMaps(app, key="AIzaSyCSkHsXrtRhNDd-5pn0aLk4l7HjsNUtdQY")
 
 with open('./data2.csv') as csvfile:
@@ -214,17 +214,17 @@ def hello():
         if "Visualization" in request.form:
             return visual()
         elif "Accident" in request.form:
-            return accident()
+            return send_js("Accident.html")
         elif "Burglary" in request.form:
-            return burglary()
+            return send_js("Burglary.html")
         elif "Children" in request.form:
-            return children()
+            return send_js("Children.html")
         elif "Theft" in request.form:
-            return theft()
+            return send_js("Theft.html")
         elif "Sexual" in request.form:
-            return sexual()
+            return send_js("Sexual.html")
         elif "Noise" in request.form:
-            return noise()
+            return send_js("Noise.html")
         else:
             return results(input)
     return render_template('index.html', form = input, mymap=mymap, danger=danger)
@@ -241,32 +241,9 @@ def visual():
     return render_template('visual.html')
 
 
-@app.route('/accident')
-def accident():
-    return render_template('distribution/Accident.html')
-
-@app.route('/burglary')
-def burglary():
-    return render_template('distribution/Burglary.html')
-
-
-@app.route('/children')
-def children():
-    return render_template('distribution/Children.html')
-
-@app.route('/theft')
-def theft():
-    return render_template('distribution/Theft.html')
-
-@app.route('/sexual')
-def sexual():
-    return render_template('distribution/Sexual.html')
-
-@app.route('/noise')
-def noise():
-    return render_template('distribution/Noise.html')
-
-
+@app.route('/<path:path>')
+def send_js(path):
+    return send_from_directory('templates/distribution/', path)
 
 
 
