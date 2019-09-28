@@ -4,6 +4,7 @@ from flask_googlemaps import GoogleMaps
 from flask_googlemaps import Map
 import csv
 from collections import defaultdict
+import math
 
 app = Flask(__name__)
 GoogleMaps(app, key="AIzaSyCSkHsXrtRhNDd-5pn0aLk4l7HjsNUtdQY")
@@ -20,7 +21,28 @@ with open('./data2.csv') as csvfile:
         data_map["address"].append(row[5])
         data_map['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
 
+def distance(p0, p1):
+    return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
 
+apt_locations = [(40.1165, -88.2295), (40.1094, -88.2348), (40.110532, -88.233987), (40.110203, -88.231651), (40.316541, -88.351220)]
+danger = [0, 0, 0, 0, 0]
+for crime in data_map['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4] += 1
+print(danger)
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
@@ -30,7 +52,9 @@ def hello():
         varname="mymap",  # for JS object name
         lat=40.110588,
         lng=-88.20727,
-        markers=data_map['latlng']
+        markers=data_map['latlng'],
+        style='height:500px;width:1200px;margin:0;',
+        zoom=16,
     )
 
 
