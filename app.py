@@ -69,6 +69,18 @@ with open('./data6.csv') as csvfile:
         data_map4["address"].append(row[5])
         data_map4['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
 
+with open('./data7.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map5 = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map5["id"].append(row[0])
+        data_map5["date"].append(row[1])
+        data_map5["time"].append(row[2])
+        data_map5["geo_code"].append(row[3])
+        data_map5["crime_category"].append(row[4])
+        data_map5["address"].append(row[5])
+        data_map5['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
+
 
 def distance(p0, p1):
     return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
@@ -165,6 +177,24 @@ for crime in data_map4['latlng']:
         danger[4][4] += 1
 print(danger[4])
 
+for crime in data_map5['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[5][0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[5][1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[5][2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[5][3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[5][4] += 1
+print(danger[5])
+
 @app.route('/', methods=['GET', 'POST'])
 def hello():
 
@@ -185,7 +215,7 @@ def hello():
             return visual()
         else:
             return results(input)
-    return render_template('index.html', form = input, mymap=mymap)
+    return render_template('index.html', form = input, mymap=mymap, danger=danger)
 
 @app.route('/results')
 def results(input):
