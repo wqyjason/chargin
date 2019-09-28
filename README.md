@@ -1,6 +1,6 @@
 # Safer Home
 
-We built the website in the hope of creating a safer environment for people living in Urbana-Champaign.
+We built the website in the hope of creating a safer environment for people living in Urbana-Champaign. Check out our website [here](https://chargin.herokuapp.com)!
 
 
 
@@ -24,7 +24,6 @@ All in all, our data speak for itself!
 ## Built With
 
 * Flask
-
 * Tableau
 * Google Map API
 
