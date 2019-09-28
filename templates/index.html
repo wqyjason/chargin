@@ -12,20 +12,12 @@
     <center>
         {{mymap.html}}
 
-        <h1>Welcome to Chargin!</h1>
-        <img src="static/background.jpg" alt="deadbeef">
+        <h1>SAFER HOME</h1>
 
         {% from "_formhelpers.html" import render_field %}
         <form method=post>
-            <dl>
-                {{ render_field(form.select) }}
-                <p>
-                {{ render_field(form.start) }}
-                <p>
-                {{ render_field(form.dest) }}
-            </dl>
-            <p><input type=submit value=Search>
-                <input type=submit name="Visualization" value=Visual>
+            <input type=submit name="Visualization" value=Data>
+                
         </form>
     </center>
 
