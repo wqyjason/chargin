@@ -1,3 +1,39 @@
 body  {
-    background-image: url({{ url_for('static', filename='background.jpg') }})
+	background: #ffc76c; opacity: 0.7;
+	background-image: "background.jpg";
+}
+
+h1 {
+	color: #111;
+	font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+}
+
+select {
+	width: 50%;
+	height: 30px;
+	font-size: 20px;
+	border-radius: 4px;
+	border: 1px;
+}
+
+input[type="submit" i] {
+	width: 10%;
+	height:50px;
+	font-size: 25px;
+	font-family: 'Helvetica Neue', sans-serif;
+}
+
+label {
+	display: none;
+}
+
+
+input {
+	width: 30%;
+	height: 30px;
+	font-size: 40px;
+	font-family: 'Helvetica Neue', sans-serif;
 }

@@ -4,6 +4,12 @@ html, body, #googft-mapCanvas {
   padding: 0;
   width: 500px;
 }
+
+h1 {
+  font-size: 25px;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
 #googft-legend {
   background-color: #fff;
   border: 1px solid #000;
