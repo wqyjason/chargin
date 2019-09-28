@@ -213,6 +213,18 @@ def hello():
     if request.method == 'POST':
         if "Visualization" in request.form:
             return visual()
+        elif "Accident" in request.form:
+            return accident()
+        elif "Burglary" in request.form:
+            return burglary()
+        elif "Children" in request.form:
+            return children()
+        elif "Theft" in request.form:
+            return theft()
+        elif "Sexual" in request.form:
+            return sexual()
+        elif "Noise" in request.form:
+            return noise()
         else:
             return results(input)
     return render_template('index.html', form = input, mymap=mymap, danger=danger)
@@ -227,6 +239,32 @@ def results(input):
 @app.route('/visualization')
 def visual():
     return render_template('visual.html')
+
+
+@app.route('/accident')
+def accident():
+    return render_template('distribution/Accident.html')
+
+@app.route('/burglary')
+def burglary():
+    return render_template('distribution/Burglary.html')
+
+
+@app.route('/children')
+def children():
+    return render_template('distribution/Children.html')
+
+@app.route('/theft')
+def theft():
+    return render_template('distribution/Theft.html')
+
+@app.route('/sexual')
+def sexual():
+    return render_template('distribution/Sexual.html')
+
+@app.route('/noise')
+def noise():
+    return render_template('distribution/Noise.html')
 
 
 
