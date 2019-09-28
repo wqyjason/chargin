@@ -2,6 +2,7 @@
 """The app module, containing the app factory function."""
 import logging
 import sys
+import geocoder
 
 from flask import Flask, render_template
 
@@ -16,7 +17,26 @@ from chargin.extensions import (
     migrate,
     webpack,
 )
+from flask_googlemaps import GoogleMaps
+from flask_googlemaps import Map
 
+app = Flask(__name__, template_folder=".")
+
+import csv
+from collections import defaultdict
+
+with open('./data.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map["id"].append(row[0])
+        data_map["date"].append(row[1])
+        data_map["time"].append(row[2])
+        data_map["geo_code"].append(row[3])
+        data_map["crime_category"].append(row[4])
+        data_map["address"].append(row[5])
+
+print(data_map)
 
 def create_app(config_object="chargin.settings"):
     """Create application factory, as explained here: http://flask.pocoo.org/docs/patterns/appfactories/.
@@ -25,12 +45,14 @@ def create_app(config_object="chargin.settings"):
     """
     app = Flask(__name__.split(".")[0])
     app.config.from_object(config_object)
+
     register_extensions(app)
     register_blueprints(app)
     register_errorhandlers(app)
     register_shellcontext(app)
     register_commands(app)
     configure_logger(app)
+    GoogleMaps(app, key="AIzaSyCSkHsXrtRhNDd-5pn0aLk4l7HjsNUtdQY")
     return app
 
 
@@ -89,3 +111,19 @@ def configure_logger(app):
     handler = logging.StreamHandler(sys.stdout)
     if not app.logger.handlers:
         app.logger.addHandler(handler)
+
+@app.route('/map')
+def map_unbounded():
+    """Create map with markers out of bounds."""
+    locations = []    # long list of coordinates
+
+    for i in range(data_map['id']):
+        addr = data_map['id'][i]
+        locations = [..., geocoder.google(addr)]
+    print(locations)
+    map = Map(
+        # lat=locations[0].latitude,
+        # lng=locations[0].longitude,
+        markers=[(loc.latitude, loc.longitude) for loc in locations]
+    )
+    return render_template('home.html', mymap=map)
