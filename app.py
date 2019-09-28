@@ -21,11 +21,60 @@ with open('./data2.csv') as csvfile:
         data_map["address"].append(row[5])
         data_map['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
 
+with open('./data3.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map1 = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map1["id"].append(row[0])
+        data_map1["date"].append(row[1])
+        data_map1["time"].append(row[2])
+        data_map1["geo_code"].append(row[3])
+        data_map1["crime_category"].append(row[4])
+        data_map1["address"].append(row[5])
+        data_map1['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
+
+with open('./data4.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map2 = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map2["id"].append(row[0])
+        data_map2["date"].append(row[1])
+        data_map2["time"].append(row[2])
+        data_map2["geo_code"].append(row[3])
+        data_map2["crime_category"].append(row[4])
+        data_map2["address"].append(row[5])
+        data_map2['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
+
+with open('./data5.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map3 = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map3["id"].append(row[0])
+        data_map3["date"].append(row[1])
+        data_map3["time"].append(row[2])
+        data_map3["geo_code"].append(row[3])
+        data_map3["crime_category"].append(row[4])
+        data_map3["address"].append(row[5])
+        data_map3['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
+
+with open('./data6.csv') as csvfile:
+    readCsv = csv.reader(csvfile, delimiter=',')
+    data_map4 = defaultdict(list)
+    for row in list(readCsv)[1:]:
+        data_map4["id"].append(row[0])
+        data_map4["date"].append(row[1])
+        data_map4["time"].append(row[2])
+        data_map4["geo_code"].append(row[3])
+        data_map4["crime_category"].append(row[4])
+        data_map4["address"].append(row[5])
+        data_map4['latlng'].append((row[len(row) - 2], row[len(row) - 1]))
+
+
 def distance(p0, p1):
     return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
 
-apt_locations = [(40.1165, -88.2295), (40.1094, -88.2348), (40.110532, -88.233987), (40.110203, -88.231651), (40.316541, -88.351220)]
-danger = [0, 0, 0, 0, 0]
+apt_locations = [(40.1165, -88.2295), (40.1094, -88.2348), (40.110532, -88.233987), (40.110203, -88.231651), (40.116890, -88.222130)]
+danger = [[0 for i in range(5)] for j in range(6)]
 for crime in data_map['latlng']:
     lat = apt_locations[0]
     t3 = apt_locations[1]
@@ -33,16 +82,88 @@ for crime in data_map['latlng']:
     skyline = apt_locations[3]
     octave = apt_locations[4]
     if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
-        danger[0] += 1
+        danger[0][0] += 1
     if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
-        danger[1] += 1
+        danger[0][1] += 1
     if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
-        danger[2] += 1
+        danger[0][2] += 1
     if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
-        danger[3] += 1
+        danger[0][3] += 1
     if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
-        danger[4] += 1
-print(danger)
+        danger[0][4] += 1
+print(danger[0])
+
+for crime in data_map1['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1][0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1][1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1][2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1][3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[1][4] += 1
+print(danger[1])
+
+for crime in data_map2['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2][0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2][1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2][2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2][3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[2][4] += 1
+print(danger[2])
+
+for crime in data_map3['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3][0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3][1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3][2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3][3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[3][4] += 1
+print(danger[3])
+
+for crime in data_map4['latlng']:
+    lat = apt_locations[0]
+    t3 = apt_locations[1]
+    here = apt_locations[2]
+    skyline = apt_locations[3]
+    octave = apt_locations[4]
+    if distance(lat, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4][0] += 1
+    if distance(t3, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4][1] += 1
+    if distance(here, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4][2] += 1
+    if distance(skyline, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4][3] += 1
+    if distance(octave, (float(crime[0]), float(crime[1]))) < 0.01:
+        danger[4][4] += 1
+print(danger[4])
 
 @app.route('/', methods=['GET', 'POST'])
 def hello():
