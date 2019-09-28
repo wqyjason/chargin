@@ -4,7 +4,7 @@ We built the website in the hope of creating a safer environment for people livi
 
 
 
-##Procedure
+## Procedure
 
 We obtained data from the [Urbana Police Incidents dataset](https://github.com/cudsug/urbana-police-incidents), and focused on six main areas in our analysis: theft, burglary, offenses to children, noise and vibration violation and sexual offenses. These are important factors in evaluating housing quality and safety. We created rectangular and geographical heatmaps and area charts from 454,172 entries of police incidents ranging from 1988 to 2019.
 
