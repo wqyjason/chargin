@@ -12,7 +12,7 @@ We then calculated the safety index for each major apartment on campus (Latitude
 
 
 
-##Potential Usage
+## Potential Usage
 
 * People in search of the safest location for their future apartments.
 * Police looking to explore the trend in various categories of crimes, the time of the day, the month of the year or even the most popular location.
