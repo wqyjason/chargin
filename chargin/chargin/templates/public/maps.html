@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport"/>
+<title>sexual offense(10-19) - Google Fusion Tables</title>
+<style type="text/css">
+html, body, #googft-mapCanvas {
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+}
+#googft-legend {
+  background-color: #fff;
+  border: 1px solid #000;
+  font-family: Arial,sans-serif;
+  font-size: 12px;
+  margin: 5px;
+  padding: 10px 10px 8px;
+}
+
+#googft-legend p {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+#googft-legend div {
+  margin-bottom: 5px;
+}
+
+.googft-legend-swatch {
+  border: 1px solid;
+  float: left;
+  height: 12px;
+  margin-right: 8px;
+  width: 20px;
+}
+
+.googft-legend-range {
+  margin-left: 0;
+}
+
+.googft-dot-icon {
+  margin-right: 8px;
+}
+
+.googft-paddle-icon {
+  height: 24px;
+  left: -8px;
+  margin-right: -8px;
+  position: relative;
+  vertical-align: middle;
+  width: 24px;
+}
+
+.googft-legend-source {
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.googft-legend-source a {
+  color: #666;
+  font-size: 11px;
+}
+
+</style>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.37&amp;libraries=visualization&amp;key=AIzaSyCSkHsXrtRhNDd-5pn0aLk4l7HjsNUtdQY&amp;unused-google-fusiontables"></script>
+
+<script type="text/javascript">
+  function initialize() {
+    var mapDiv = document.getElementById('googft-mapCanvas');
+    mapDiv.style.width = '1000px';
+    mapDiv.style.height = '800px';
+    var map = new google.maps.Map(mapDiv, {
+      center: new google.maps.LatLng(40.10988172018728, -88.20442549752136),
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId['ROADMAP']
+    });
+    map.controls[google.maps.ControlPosition['RIGHT_BOTTOM']].push(document.getElementById('googft-legend-open'));
+    map.controls[google.maps.ControlPosition['RIGHT_BOTTOM']].push(document.getElementById('googft-legend'));
+
+    layer = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col5",
+        from: "1NmjPiTRATZULlCzDHAzsL88WYj6mlFHcxfhFPrN3",
+        where: ""
+      },
+      options: {
+        styleId: 2,
+        templateId: 3
+      }
+    });
+
+    if (isMobile) {
+      var legend = document.getElementById('googft-legend');
+      var legendOpenButton = document.getElementById('googft-legend-open');
+      var legendCloseButton = document.getElementById('googft-legend-close');
+      legend.style.display = 'none';
+      legendOpenButton.style.display = 'block';
+      legendCloseButton.style.display = 'block';
+      legendOpenButton.onclick = function() {
+        legend.style.display = 'block';
+        legendOpenButton.style.display = 'none';
+      }
+      legendCloseButton.onclick = function() {
+        legend.style.display = 'none';
+        legendOpenButton.style.display = 'block';
+      }
+    }
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+  <div id="googft-mapCanvas"></div>
+</body>
+</html>

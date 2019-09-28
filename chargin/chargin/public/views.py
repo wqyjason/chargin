@@ -8,8 +8,10 @@ from flask import (
     render_template,
     request,
     url_for,
+    Flask,
 )
 from flask_login import login_required, login_user, logout_user
+from flask_googlemaps import GoogleMaps, Map
 
 from chargin.extensions import login_manager
 from chargin.public.forms import LoginForm
@@ -17,7 +19,10 @@ from chargin.user.forms import RegisterForm
 from chargin.user.models import User
 from chargin.utils import flash_errors
 
+
+
 blueprint = Blueprint("public", __name__, static_folder="../static")
+# GoogleMaps(current_app, key="AIzaSyCk4JwW6dunM69b6Qi-9L0UtEK0jnwUXJk")
 
 
 @login_manager.user_loader
@@ -50,6 +55,39 @@ def logout():
     logout_user()
     flash("You are logged out.", "info")
     return redirect(url_for("public.home"))
+
+
+@blueprint.route("/maps/")
+def maps():
+    """Map page"""
+    # mymap = Map(
+    #     identifier="view-side",
+    #     lat=37.4419,
+    #     lng=-122.1419,
+    #     markers=[(37.4419, -122.1419)]
+    # )
+    # sndmap = Map(
+    #     identifier="sndmap",
+    #     lat=37.4419,
+    #     lng=-122.1419,
+    #     markers=[
+    #       {
+    #          'icon': 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+    #          'lat': 37.4419,
+    #          'lng': -122.1419,
+    #          'infobox': "<b>Hello World</b>"
+    #       },
+    #       {
+    #          'icon': 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+    #          'lat': 37.4300,
+    #          'lng': -122.1400,
+    #          'infobox': "<b>Hello World from other place</b>"
+    #       }
+    #     ]
+    # )
+    # return render_template('/home/jason/Documents/projects/chargin/chargin/chargin/templates/public/maps.html', mymap=sndmap)
+    return render_template('public/maps.html')
+
 
 
 @blueprint.route("/register/", methods=["GET", "POST"])
