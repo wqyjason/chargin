@@ -4,11 +4,15 @@
     <head>
       <title>Flask app</title>
       <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+        {{mymap.js}}
     </head>
     <body>
 
 
-    <center> <h1>Welcome to Chargin!</h1>
+    <center>
+        {{mymap.html}}
+
+        <h1>Welcome to Chargin!</h1>
         <img src="static/background.jpg" alt="deadbeef">
 
         {% from "_formhelpers.html" import render_field %}
